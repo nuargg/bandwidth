@@ -3,102 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Tunnel Bandwidth</title>
+    <title>Bandwidth Checker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
+            background-color: #f4f4f9;
             color: #333;
         }
-        form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 50%;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            font-size: 14px;
-            color: #333;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .result p {
-            font-size: 16px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         footer {
             text-align: center;
-            margin-top: 40px;
-            font-size: 12px;
-            color: #777;
+            margin-top: 20px;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
         }
-        .footer-logo {
-            width: 12px;
-            vertical-align: middle;
-            margin-left: 5px;
+        h3 {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Check Tunnel Bandwidth</h1>
-    <form method="POST">
-        <label for="api">API Token:</label>
-        <input type="text" id="api" name="api" required><br>
+    <div class="container">
+        <h1>Bandwidth Checker</h1>
+        <form method="POST" action="/">
+            <label for="api_key">API Key:</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <button type="submit">Check Bandwidth</button>
+        </form>
         
-        <label for="id_tunnel">Tunnel ID:</label>
-        <input type="text" id="id_tunnel" name="id_tunnel" required><br>
+        {% if result %}
+        <h3>Result:</h3>
+        <p><strong>Title:</strong> {{ result.title }}</p>
+        <p><strong>Bandwidth Limit:</strong> {{ result.bandwidthLimit }} MB</p>
+        <p><strong>Bandwidth Usage:</strong> {{ result.bandwidthUsage }} MB</p>
+        {% endif %}
         
-        <button type="submit">Check Bandwidth</button>
-    </form>
-
-    {% if result %}
-    <div class="result">
-        <h2>Result:</h2>
-        <p><b>Title:</b> {{ result.title }}</p>
-        <p><b>Bandwidth Limit:</b> {{ result.bandwidthLimit }} MB</p>
-        <p><b>Bandwidth Usage:</b> {{ result.bandwidthUsage }} MB</p>
-    </div>
-    {% endif %}
-
-    {% if error %}
-    <div class="result">
-        <h2>Error:</h2>
+        {% if error %}
+        <h3>Error:</h3>
         <p>{{ error }}</p>
+        {% endif %}
     </div>
-    {% endif %}
 
-    <!-- Footer dengan logo copyright -->
     <footer>
-        <p>This Web Made By @NUAR <img class="footer-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Unicode_2022_Copyright_symbol.svg/1024px-Unicode_2022_Copyright_symbol.svg.png" alt="copyright logo"></p>
+        <p>This Web Made By @NUAR copyright logo</p>
     </footer>
 </body>
 </html>
